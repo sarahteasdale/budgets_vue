@@ -1,0 +1,47 @@
+// Global Styles
+
+body {
+    background-color: #ffffff;
+  }
+  
+  a {
+    color: #5198FF;
+  }
+  
+  // Card
+  
+  .card {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .09);
+    text-align: center;
+    width: 200px;
+    margin: 0 auto;
+  
+    .card-title {
+      font-weight: 400;
+      font-size: 18px;
+    }
+  
+    .card-subtitle {
+      color: #464646;
+      margin-bottom: 1.5rem;
+    }
+  
+    .card-footer {
+      width: 100%;
+      color: #464646;
+      padding-top: 1.5em;
+    }
+  }
+  
+  // Vue Transitions
+  
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all .5s ease-out;
+  }
+  
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  

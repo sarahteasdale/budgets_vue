@@ -1,29 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <Header />
+    <div id="content">
+      <!-- component matched by the route renders below -->
     <router-view />
+  </div>
+  <Footer />
   </div>
 </template>
 
-<style lang="scss">
+<script>
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+export default {
+  components: {
+    Header,
+    Footer
+  }
+};
+
+</script>
+
+
+<style scoped lang="scss">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #1E1E1E;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#content {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
 }
 </style>

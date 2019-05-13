@@ -1,6 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+
+import Signup from "./views/Signup";
+import Signin from "./views/Signin";
+import Services from "./views/Services";
+import Budgets from "./views/Budgets";
+import store from "./store";
 
 Vue.use(Router);
 
@@ -9,18 +14,50 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
-      name: "home",
-      component: Home
+      path: "/services",
+      component: Services
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+      path: "/budgets",
+      component: Budgets,
+      beforeEnter: requireAuth
+    },
+    {
+      path: "/sign-in",
+      component: Signin
+    },
+    {
+      path: "/sign-up",
+      component: Signup
+    },
+    {
+      path: "/sign-out",
+      beforeEnter(to, from, next) {
+        store.dispatch("signOut");
+        next("sign-in");
+      }
+    },
+    {
+      path: "*",
+      redirect: "/services"
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });
+
+function requireAuth(to, from, next) {
+  if (store.getters.isAuthenticated) {
+    next();
+  } else {
+    next({
+      path: "/sign-in",
+      query: { redirect: to.fullPath }
+    });
+  }
+}
